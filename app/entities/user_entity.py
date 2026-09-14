@@ -8,7 +8,6 @@ from pydantic import EmailStr
 class UserEntity:
     id: int
     email: EmailStr
-    firstname: str
-    secondname: str
+    name: str
     hashed_password: str
     created_at: datetime
