@@ -18,8 +18,8 @@ class InMemoryCategoryRepository:
     def get_by_id(self, id: int) -> CategoryEntity | None:
         return self._categories[id] or None
 
-    def delete(self, category: CategoryEntity) -> CategoryEntity:
-        category = self._categories[category.id]
+    def delete(self, data: CategoryEntity) -> CategoryEntity:
+        category = self._categories[data.id]
         if not category:
             raise Exception("Такой позиции не существует")  #! create own exceptions
         del self._categories[category.id]

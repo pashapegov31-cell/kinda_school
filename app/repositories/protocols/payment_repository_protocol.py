@@ -1,0 +1,9 @@
+from typing import Protocol
+
+from app.entities.payment_entity import PaymentEntity
+
+
+class PaymentsRepository(Protocol):
+    async def create(self, new_payment: PaymentEntity) -> PaymentEntity: ...
+    async def get_by_id(self, id: int) -> PaymentEntity | None: ...
+    async def get_by_order_id(self, order_id: int) -> PaymentEntity | None: ...
