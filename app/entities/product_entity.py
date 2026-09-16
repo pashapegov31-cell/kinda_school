@@ -2,6 +2,8 @@ from dataclasses import dataclass
 from datetime import datetime
 from decimal import Decimal
 
+from app.entities.category_entity import CategoryEntity
+
 
 @dataclass
 class ProductEntity:
@@ -10,5 +12,5 @@ class ProductEntity:
     description: str
     price: Decimal
     stock: int
-    category_id: int
+    category: CategoryEntity
     created_at: datetime
