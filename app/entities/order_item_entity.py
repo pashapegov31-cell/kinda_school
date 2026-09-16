@@ -3,7 +3,7 @@ from decimal import Decimal
 
 
 @dataclass
-class OrederItemEntity:
+class OrderItemEntity:
     id: int
     order_id: int
     product_id: int
