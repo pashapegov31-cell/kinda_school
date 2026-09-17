@@ -4,7 +4,7 @@ from app.entities.cart_item_entity import CartItemEntity
 
 
 @dataclass
-class Cart:
+class CartEntity:
     id: int
     user_id: int
     items: list[CartItemEntity]
