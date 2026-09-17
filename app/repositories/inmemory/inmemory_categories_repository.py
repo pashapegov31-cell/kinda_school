@@ -1,4 +1,5 @@
 from app.entities.category_entity import CategoryEntity
+from app.exceptions.exceptions import CantBeDeletedError
 
 
 class InMemoryCategoryRepository:
@@ -16,11 +17,11 @@ class InMemoryCategoryRepository:
         return None
 
     async def get_by_id(self, id: int) -> CategoryEntity | None:
-        return self._categories[id] or None
+        return self._categories.get(id)
 
     async def delete(self, data: CategoryEntity) -> CategoryEntity:
         category = self._categories[data.id]
         if not category:
-            raise Exception("Такой позиции не существует")  #! create own exceptions
+            raise CantBeDeletedError("Такой позиции не существует")
         del self._categories[category.id]
         return category

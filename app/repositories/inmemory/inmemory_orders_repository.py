@@ -10,6 +10,6 @@ class InMemoryOrdersRepository:
         return new_order
 
     async def get_by_id(self, id: int) -> OrderEntity | None:
-        return self._orders[id] or None
+        return self._orders.get(id)
 
     # ? more methods???

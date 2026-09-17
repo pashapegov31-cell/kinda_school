@@ -1,0 +1,9 @@
+from typing import Protocol
+
+from app.entities.cart_entity import CartEntity
+
+
+class CartsRepository(Protocol):
+    async def create(self, new_cart: CartEntity) -> CartEntity: ...
+    async def get_by_user_id(self, user_id: int) -> CartEntity | None: ...
+    async def get_by_id(self, id: int) -> CartEntity | None: ...
