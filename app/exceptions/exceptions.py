@@ -4,3 +4,11 @@ class AuthError(Exception):
 
 class UserAlreadyExistsError(AuthError):
     pass
+
+
+class LoginError(AuthError):
+    pass
+
+
+class CantBeDeletedError(Exception):
+    pass
