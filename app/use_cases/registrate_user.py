@@ -3,10 +3,8 @@ from datetime import datetime, timezone
 from app.entities.user_entity import UserEntity
 from app.exceptions.exceptions import UserAlreadyExistsError
 from app.models.user_model import UserCreate
-from app.repositories.inmemory.inmemory_users_repository import InMemoryUsersRepository
 from app.repositories.protocols.users_repository_protocol import UsersRepository
-
-user_repo = InMemoryUsersRepository()
+from app.utils.passlib_hash import hash_password
 
 
 class RegisterUserUseCase:
@@ -20,7 +18,7 @@ class RegisterUserUseCase:
             id=0,
             email=user_data.email,
             name=user_data.name,
-            hashed_password=user_data.password,
+            hashed_password=await hash_password(user_data.password),
             created_at=datetime.now(tz=timezone.utc),
         )
         await self._user_repo.create(new_user)
