@@ -24,6 +24,7 @@ class InMemoryUsersRepository:
 
     async def create(self, new_user: UserEntity) -> UserEntity:
         InMemoryUsersRepository.new_user_id += 1
+        new_user.id = InMemoryUsersRepository.new_user_id
         self._users[InMemoryUsersRepository.new_user_id] = new_user
 
         return new_user
