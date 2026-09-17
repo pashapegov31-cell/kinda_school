@@ -14,7 +14,7 @@ class RegisterUserUseCase:
         self._user_repo = user_repo
 
     async def execute(self, user_data: UserCreate) -> UserEntity:
-        if await user_repo.exists_email(email=user_data.email):
+        if await self._user_repo.exists_email(email=user_data.email):
             raise UserAlreadyExistsError("Пользователь с данным email уже существует")
         new_user = UserEntity(
             id=0,
