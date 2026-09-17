@@ -2,6 +2,8 @@ from app.entities.user_entity import UserEntity
 
 
 class InMemoryUsersRepository:
+    new_user_id = -1
+
     def __init__(self):
         self._users: dict[int, UserEntity] = {}
 
@@ -21,7 +23,8 @@ class InMemoryUsersRepository:
         return None
 
     async def create(self, new_user: UserEntity) -> UserEntity:
-        self._users[new_user.id] = new_user
+        InMemoryUsersRepository.new_user_id += 1
+        self._users[InMemoryUsersRepository.new_user_id] = new_user
 
         return new_user
 
