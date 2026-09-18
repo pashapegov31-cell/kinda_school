@@ -12,7 +12,7 @@ class UserLogin(BaseModel):
     password: str
 
 
-class LoginResponse(BaseModel):
+class AuthResponse(BaseModel):
     access_token: str
     token_type: str
 
