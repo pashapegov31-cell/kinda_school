@@ -1,1 +1,7 @@
 pydantic
+pydantic[email]
+fastapi
+redis
+pytest
+passlib[bcrypt]
+python-jose[cryptography]
