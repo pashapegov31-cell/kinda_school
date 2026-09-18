@@ -12,6 +12,11 @@ class UserLogin(BaseModel):
     password: str
 
 
+class LoginResponse(BaseModel):
+    access_token: str
+    token_type: str
+
+
 class UserResponse(BaseModel):
     email: EmailStr
     name: str
