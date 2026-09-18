@@ -12,3 +12,11 @@ class LoginError(AuthError):
 
 class CantBeDeletedError(Exception):
     pass
+
+
+class TokenError(Exception):
+    pass
+
+
+class NotAccessTokenError(TokenError):
+    pass
