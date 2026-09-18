@@ -1,5 +1,6 @@
 pydantic
 pydantic[email]
+pydantic-settings
 fastapi
 redis
 pytest
