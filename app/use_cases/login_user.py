@@ -1,5 +1,5 @@
 from app.exceptions.exceptions import LoginError, TokenError
-from app.models.user_model import LoginResponse, UserLogin
+from app.models.user_model import AuthResponse, UserLogin
 from app.repositories.protocols.users_repository_protocol import UsersRepository
 from app.services.token_service import TokenService
 from app.utils.passlib_hash import verify_password
@@ -10,7 +10,7 @@ class LoginUserUseCase:
         self._user_repo = user_repo
         self._token_service = token_service
 
-    async def execute(self, user: UserLogin) -> LoginResponse:
+    async def execute(self, user: UserLogin) -> AuthResponse:
         account = await self._user_repo.get_by_email(user.email)
         if not (
             account and await verify_password(user.password, account.hashed_password)
@@ -21,4 +21,4 @@ class LoginUserUseCase:
         )
         if not access_token:
             raise TokenError("Токен не был создан")
-        return LoginResponse(access_token=access_token, token_type="Bearer")
+        return AuthResponse(access_token=access_token, token_type="Bearer")
