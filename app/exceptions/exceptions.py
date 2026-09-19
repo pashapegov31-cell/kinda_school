@@ -10,7 +10,7 @@ class LoginError(AuthError):
     pass
 
 
-class CantBeDeletedError(Exception):
+class CantBeUpdatedError(Exception):
     pass
 
 
