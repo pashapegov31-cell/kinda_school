@@ -13,6 +13,6 @@ async def me(
     user_repo: UsersRepository = Depends(get_inmemory_user_repo),
 ):
     user = await user_repo.get_by_id(user_id)
-    if not user:
+    if user is None:
         raise HTTPException(status_code=404, detail="User not found")
     return UserResponse(email=user.email, name=user.name, role=user.role)

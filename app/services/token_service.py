@@ -14,7 +14,7 @@ class TokenService:
         now = datetime.now(timezone.utc)
         exp = now + timedelta(minutes=15)
         payload = {
-            "sub": user_id,
+            "sub": str(user_id),
             "email": email,
             "iat": now,
             "exp": exp,
@@ -35,6 +35,6 @@ class TokenService:
         if decoded_token.get("typ") != "access":
             raise NotAccessTokenError("Данный токен не является access токеном")
         user_id = decoded_token.get("sub")
-        if not user_id:
+        if user_id is None:
             raise TokenError("В токене отсутствует user_id")
-        return user_id
+        return int(user_id)

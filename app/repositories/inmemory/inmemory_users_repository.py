@@ -12,8 +12,8 @@ class InMemoryUsersRepository:
                 return user
         return None
 
-    async def get_by_id(self, id: int) -> UserEntity | None:
-        return self._users.get(id)
+    async def get_by_id(self, user_id: int) -> UserEntity | None:
+        return self._users.get(user_id)
 
     async def get_by_name(self, name: str) -> UserEntity | None:
         for user in self._users.values():
@@ -23,7 +23,7 @@ class InMemoryUsersRepository:
 
     async def create(self, new_user: UserEntity) -> UserEntity:
         new_user.id = self._next_id
-        self._users[self._next_id] = new_user
+        self._users[new_user.id] = new_user
         self._next_id += 1
 
         return new_user
