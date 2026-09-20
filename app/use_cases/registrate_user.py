@@ -1,6 +1,6 @@
 from datetime import datetime, timezone
 
-from app.entities.user_entity import UserEntity
+from app.entities.user_entity import UserEntity, UserRole
 from app.exceptions.exceptions import UserAlreadyExistsError
 from app.models.user_model import AuthResponse, UserCreate
 from app.repositories.protocols.users_repository_protocol import UsersRepository
@@ -24,6 +24,7 @@ class RegisterUserUseCase:
             id=0,
             email=user_data.email,
             name=user_data.name,
+            role=UserRole.STUDENT,
             hashed_password=await hash_password(user_data.password),
             created_at=datetime.now(tz=timezone.utc),
         )
