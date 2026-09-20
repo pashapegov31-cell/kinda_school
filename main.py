@@ -1,9 +1,8 @@
 # from contextlib import asynccontextmanager
-from fastapi import Depends, FastAPI
+from fastapi import FastAPI
 
-from app.dependencies import get_inmemory_user_repo, get_register_uc
-from app.models.user_model import AuthResponse, UserCreate
-from app.services.auth_service import AuthService
+from app.routes.auth_route import auth_router
+from app.routes.security_route import security_router
 
 # from redis.asyncio import ConnectionPool, Redis
 
@@ -29,14 +28,5 @@ from app.services.auth_service import AuthService
 
 app = FastAPI()
 
-
-@app.post("/v1/register")
-async def register(
-    email: str,
-    name: str,
-    password: str,
-    user_repo=Depends(get_inmemory_user_repo),
-    register_uc=Depends(get_register_uc),
-) -> AuthResponse | None:
-    new_user = UserCreate(email=email, name=name, password=password)
-    await AuthService(user_repo, register_uc, login_uc=None).register(new_user)
+app.include_router(auth_router, prefix="/v1", tags=["Auth"])
+app.include_router(security_router, prefix="/v1", tags=["Me"])
