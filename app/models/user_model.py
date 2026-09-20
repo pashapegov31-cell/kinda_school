@@ -1,5 +1,7 @@
 from pydantic import BaseModel, EmailStr
 
+from app.entities.user_entity import UserRole
+
 
 class UserCreate(BaseModel):
     email: EmailStr
@@ -20,9 +22,11 @@ class AuthResponse(BaseModel):
 class UserResponse(BaseModel):
     email: EmailStr
     name: str
+    role: UserRole
 
 
 class UserUpdate(BaseModel):
     email: EmailStr
     name: str
+    role: UserRole
     password: str
