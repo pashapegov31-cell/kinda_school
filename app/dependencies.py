@@ -59,7 +59,7 @@ def require_role(role: UserRole):
         user = await user_repo.get_by_id(user_id)
         if not user:
             raise HTTPException(status_code=404, detail="User Not Found")
-        if user.role != role:
+        if user.role not in [role, UserRole.ADMIN]:
             raise HTTPException(status_code=403, detail="Forbidden")
         return user_id
 
