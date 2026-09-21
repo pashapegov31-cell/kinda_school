@@ -2,6 +2,7 @@
 from fastapi import FastAPI
 
 from app.routes.auth_route import auth_router
+from app.routes.course_route import course_router
 from app.routes.security_route import security_router
 
 # from redis.asyncio import ConnectionPool, Redis
@@ -30,3 +31,4 @@ app = FastAPI()
 
 app.include_router(auth_router, prefix="/v1", tags=["Auth"])
 app.include_router(security_router, prefix="/v1", tags=["Me"])
+app.include_router(course_router, prefix="/v1", tags=["Courses"])
