@@ -9,6 +9,7 @@ class LessonProgressCreate(BaseModel):
 
 
 class LessonProgressResponse(BaseModel):
+    id: int
     enrollment_id: int
     lesson_id: int
     completed: bool

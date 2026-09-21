@@ -9,6 +9,7 @@ class LessonCreate(BaseModel):
 
 
 class LessonResponse(BaseModel):
+    id: int
     course_id: int
     title: str
     content: str
