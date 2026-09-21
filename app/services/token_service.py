@@ -2,6 +2,7 @@ from datetime import datetime, timedelta, timezone
 
 from jose import JWTError, jwt
 
+from app.core.config_settings import settings
 from app.exceptions.exceptions import NotAccessTokenError, TokenError
 
 
@@ -12,7 +13,7 @@ class TokenService:
 
     def create_access_token(self, user_id: int, email: str) -> str:
         now = datetime.now(timezone.utc)
-        exp = now + timedelta(minutes=15)
+        exp = now + timedelta(minutes=settings.ACCESS_TOKEN_EXPIRE_MINUTES)
         payload = {
             "sub": str(user_id),
             "email": email,
