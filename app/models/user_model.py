@@ -28,5 +28,4 @@ class UserResponse(BaseModel):
 class UserUpdate(BaseModel):
     email: EmailStr
     name: str
-    role: UserRole
     password: str
