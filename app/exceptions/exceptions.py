@@ -20,3 +20,11 @@ class TokenError(Exception):
 
 class NotAccessTokenError(TokenError):
     pass
+
+
+class NotValidValue(Exception):
+    pass
+
+
+class NotValidPrice(NotValidValue):
+    pass
