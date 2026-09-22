@@ -7,6 +7,8 @@ from app.utils.passlib_hash import hash_password
 
 
 async def seed_admin():
+    if await users_repo.exists_email(settings.ADMIN_EMAIL):
+        return
     admin = UserEntity(
         id=0,
         email=settings.ADMIN_EMAIL,

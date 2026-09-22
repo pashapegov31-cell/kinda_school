@@ -1,4 +1,5 @@
 from app.entities.user_entity import UserEntity
+from app.exceptions.exceptions import CantBeUpdatedError
 
 
 class InMemoryUsersRepository:
@@ -33,3 +34,13 @@ class InMemoryUsersRepository:
             if user.email == email:
                 return True
         return False
+
+    async def update(self, updated_user: UserEntity) -> UserEntity:
+
+        searched_user = self._users.get(updated_user.id)
+        if not searched_user:
+            raise CantBeUpdatedError(
+                "Нельзя изменить роль несуществующего пользователя"
+            )
+        self._users[updated_user.id] = updated_user
+        return updated_user

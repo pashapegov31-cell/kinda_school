@@ -10,7 +10,15 @@ class LoginError(AuthError):
     pass
 
 
-class CantBeUpdatedError(Exception):
+class UserError(Exception):
+    pass
+
+
+class CantBeUpdatedError(UserError):
+    pass
+
+
+class NoSuchUser(UserError):
     pass
 
 

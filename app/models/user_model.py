@@ -9,6 +9,11 @@ class UserCreate(BaseModel):
     password: str
 
 
+class ChangeUserRole(BaseModel):
+    user_id: int
+    new_role: UserRole
+
+
 class UserLogin(BaseModel):
     email: EmailStr
     password: str
