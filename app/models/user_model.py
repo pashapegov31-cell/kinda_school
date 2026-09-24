@@ -1,4 +1,4 @@
-from pydantic import BaseModel, EmailStr
+from pydantic import BaseModel, ConfigDict, EmailStr
 
 from app.entities.user_entity import UserRole
 
@@ -25,6 +25,8 @@ class AuthResponse(BaseModel):
 
 
 class UserResponse(BaseModel):
+    model_config = ConfigDict(from_attributes=True)
+
     email: EmailStr
     name: str
     role: UserRole
