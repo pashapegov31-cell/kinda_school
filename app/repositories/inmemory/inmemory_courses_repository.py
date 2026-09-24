@@ -41,3 +41,6 @@ class InMemoryCourseRepository:
         searched_course = self._courses.get(course_id)
         if searched_course:
             del self._courses[course_id]
+
+    async def get_all_courses(self) -> list[CourseEntity]:
+        return list(self._courses.values())
