@@ -16,6 +16,7 @@ from app.services.token_service import TokenService
 from app.use_cases.change_user_role import ChangeUserRoleUseCase
 from app.use_cases.create_course import CreateCourseUseCase
 from app.use_cases.create_lesson import LessonCreateUseCase
+from app.use_cases.get_course_lessons_list import GetCourseLessonsList
 from app.use_cases.login_user import LoginUserUseCase
 from app.use_cases.publish_course import PublishCourseUseCase
 from app.use_cases.registrate_user import RegisterUserUseCase
@@ -61,6 +62,10 @@ def get_publish_course_uc():
 
 def get_create_lesson_uc():
     return LessonCreateUseCase(lessons_repo, courses_repo)
+
+
+def get_course_lessons_uc():
+    return GetCourseLessonsList(courses_repo, lessons_repo)
 
 
 async def get_current_user_id(
