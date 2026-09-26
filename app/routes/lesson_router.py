@@ -1,9 +1,8 @@
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, Depends, Query
 
 from app.dependencies import (
     get_course_lessons_uc,
     get_create_lesson_uc,
-    get_current_user_id,
     get_lesson_details_uc,
     require_role,
 )
@@ -35,8 +34,9 @@ async def create_lesson(
 @lesson_router.get("/courses/{course_id}/lessons", response_model=list[LessonListItem])
 async def get_course_lessons(
     course_id: int,
+    limit: int = Query(default=10, ge=1, le=100),
+    offset: int = Query(default=0, ge=0),
     get_course_lessons_uc: GetCourseLessonsList = Depends(get_course_lessons_uc),
-    user_id: int = Depends(get_current_user_id),
 ):
     lessons = await get_course_lessons_uc.execute(course_id)
     return [LessonListItem.model_validate(l) for l in lessons]
@@ -51,4 +51,6 @@ async def get_lesson_details(
     get_lesson_details_uc: GetLessonDetailsUseCase = Depends(get_lesson_details_uc),
     teacher_id: int = Depends(require_role(UserRole.TEACHER)),
 ):
-    return await get_lesson_details_uc.execute(course_id, lesson_id)
+    return LessonResponse.model_validate(
+        await get_lesson_details_uc.execute(course_id, lesson_id, teacher_id)
+    )

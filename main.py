@@ -55,7 +55,7 @@ async def user_exists_handler(request: Request, exc: UserAlreadyExistsError):
 
 
 @app.exception_handler(NotFoundError)
-async def update_hadler(request: Request, exc: NotFoundError):
+async def update_handler(request: Request, exc: NotFoundError):
     return JSONResponse(status_code=404, content={"detail": str(exc)})
 
 

@@ -70,7 +70,7 @@ def get_course_lessons_uc():
 
 
 def get_lesson_details_uc():
-    return GetLessonDetailsUseCase(lessons_repo)
+    return GetLessonDetailsUseCase(lessons_repo, courses_repo)
 
 
 async def get_current_user_id(
