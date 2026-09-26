@@ -12,9 +12,10 @@ from app.exceptions.exceptions import (
     UserError,
 )
 from app.routes.auth_route import auth_router
-from app.routes.change_user_route import change_user_router
 from app.routes.course_route import course_router
+from app.routes.lesson_router import lesson_router
 from app.routes.security_route import security_router
+from app.routes.user_route import user_router
 from app.seed_admin import seed_admin
 
 
@@ -61,4 +62,5 @@ async def update_hadler(request: Request, exc: NotFoundError):
 app.include_router(auth_router, prefix="/v1", tags=["Auth"])
 app.include_router(security_router, prefix="/v1", tags=["Me"])
 app.include_router(course_router, prefix="/v1", tags=["Courses"])
-app.include_router(change_user_router, prefix="/v1", tags=["UserChange"])
+app.include_router(user_router, prefix="/v1", tags=["Users"])
+app.include_router(lesson_router, prefix="/v1", tags=["Lessons"])
