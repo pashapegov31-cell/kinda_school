@@ -7,17 +7,24 @@ from app.exceptions.exceptions import TokenError
 from app.repositories.inmemory.inmemory_courses_repository import (
     InMemoryCourseRepository,
 )
+from app.repositories.inmemory.inmemory_lessons_repository import (
+    InMemoryLessonRepository,
+)
 from app.repositories.inmemory.inmemory_users_repository import InMemoryUsersRepository
+from app.repositories.protocols.users_repository_protocol import UsersRepository
 from app.services.token_service import TokenService
 from app.use_cases.change_user_role import ChangeUserRoleUseCase
 from app.use_cases.create_course import CreateCourseUseCase
+from app.use_cases.create_lesson import LessonCreateUseCase
 from app.use_cases.login_user import LoginUserUseCase
+from app.use_cases.publish_course import PublishCourseUseCase
 from app.use_cases.registrate_user import RegisterUserUseCase
 
 bearer = HTTPBearer()
 token_service = TokenService(settings.TOKEN_SECRET_KEY, settings.ALGORITHM)
 users_repo = InMemoryUsersRepository()
 courses_repo = InMemoryCourseRepository()
+lessons_repo = InMemoryLessonRepository()
 
 
 def get_inmemory_users_repo():
@@ -26,6 +33,10 @@ def get_inmemory_users_repo():
 
 def get_inmemory_courses_repo():
     return courses_repo
+
+
+def get_inmemory_lessons_repo():
+    return lessons_repo
 
 
 def get_register_uc():
@@ -37,11 +48,19 @@ def get_login_uc():
 
 
 def get_create_course_uc():
-    return CreateCourseUseCase(courses_repo)
+    return CreateCourseUseCase(courses_repo, lessons_repo)
 
 
 def get_change_user_role_uc():
     return ChangeUserRoleUseCase(users_repo)
+
+
+def get_publish_course_uc():
+    return PublishCourseUseCase(courses_repo)
+
+
+def get_create_lesson_uc():
+    return LessonCreateUseCase(lessons_repo, courses_repo)
 
 
 async def get_current_user_id(
@@ -59,7 +78,7 @@ async def get_current_user_id(
 def require_role(role: UserRole):
     async def check(
         user_id: int = Depends(get_current_user_id),
-        user_repo=Depends(get_inmemory_users_repo),
+        user_repo: UsersRepository = Depends(get_inmemory_users_repo),
     ) -> int:
         user = await user_repo.get_by_id(user_id)
         if not user:
