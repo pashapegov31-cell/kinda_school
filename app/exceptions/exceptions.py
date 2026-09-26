@@ -14,7 +14,11 @@ class UserError(Exception):
     pass
 
 
-class CantBeUpdatedError(UserError):
+class NotFoundError(Exception):
+    pass
+
+
+class CantBeUpdatedError(NotFoundError):
     pass
 
 
@@ -35,4 +39,8 @@ class NotValidValue(Exception):
 
 
 class NotValidPrice(NotValidValue):
+    pass
+
+
+class ForbiddenError(Exception):
     pass
