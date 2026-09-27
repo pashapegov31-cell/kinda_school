@@ -7,6 +7,12 @@ from app.exceptions.exceptions import TokenError
 from app.repositories.inmemory.inmemory_courses_repository import (
     InMemoryCourseRepository,
 )
+from app.repositories.inmemory.inmemory_enrollments_repository import (
+    InMemoryEnrollmentRepository,
+)
+from app.repositories.inmemory.inmemory_lesson_progresses_repository import (
+    InMemoryLessonProgressRepository,
+)
 from app.repositories.inmemory.inmemory_lessons_repository import (
     InMemoryLessonRepository,
 )
@@ -16,6 +22,7 @@ from app.services.token_service import TokenService
 from app.use_cases.change_user_role import ChangeUserRoleUseCase
 from app.use_cases.create_course import CreateCourseUseCase
 from app.use_cases.create_lesson import LessonCreateUseCase
+from app.use_cases.enroll_in_course import EnrollInCourseUseCase
 from app.use_cases.get_course_lessons_list import GetCourseLessonsList
 from app.use_cases.get_lesson_details import GetLessonDetailsUseCase
 from app.use_cases.login_user import LoginUserUseCase
@@ -27,6 +34,8 @@ token_service = TokenService(settings.TOKEN_SECRET_KEY, settings.ALGORITHM)
 users_repo = InMemoryUsersRepository()
 courses_repo = InMemoryCourseRepository()
 lessons_repo = InMemoryLessonRepository()
+enrollments_repo = InMemoryEnrollmentRepository()
+lessons_progress_repo = InMemoryLessonProgressRepository()
 
 
 def get_inmemory_users_repo():
@@ -39,6 +48,14 @@ def get_inmemory_courses_repo():
 
 def get_inmemory_lessons_repo():
     return lessons_repo
+
+
+def get_inmemory_enrollments_repo():
+    return enrollments_repo
+
+
+def get_inmemory_lessons_progress_repo():
+    return lessons_progress_repo
 
 
 def get_register_uc():
@@ -70,7 +87,11 @@ def get_course_lessons_uc():
 
 
 def get_lesson_details_uc():
-    return GetLessonDetailsUseCase(lessons_repo, courses_repo)
+    return GetLessonDetailsUseCase(lessons_repo, courses_repo, enrollments_repo)
+
+
+def get_enroll_in_course_uc():
+    return EnrollInCourseUseCase(enrollments_repo, courses_repo, users_repo)
 
 
 async def get_current_user_id(
