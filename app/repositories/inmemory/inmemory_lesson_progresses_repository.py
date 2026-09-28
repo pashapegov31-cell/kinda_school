@@ -50,3 +50,10 @@ class InMemoryLessonProgressRepository:
     async def delete(self, lesson_progress_id: int) -> None:
         if lesson_progress_id in self._lesson_progresses:
             del self._lesson_progresses[lesson_progress_id]
+
+    async def get_by_lesson_id(self, lesson_id: int) -> list[LessonProgressEntity]:
+        progresses = []
+        for lesson_progress in self._lesson_progresses.values():
+            if lesson_progress.lesson_id == lesson_id:
+                progresses.append(lesson_progress)
+        return progresses
