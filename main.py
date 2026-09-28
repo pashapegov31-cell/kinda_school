@@ -11,12 +11,12 @@ from app.exceptions.exceptions import (
     UserAlreadyExistsError,
     UserError,
 )
-from app.routes.auth_router import auth_router
-from app.routes.course_router import course_router
-from app.routes.enrollment_router import enrollment_router
-from app.routes.lesson_router import lesson_router
-from app.routes.security_router import security_router
-from app.routes.user_router import user_router
+from app.routers.auth_router import auth_router
+from app.routers.course_router import course_router
+from app.routers.enrollment_router import enrollment_router
+from app.routers.lesson_router import lesson_router
+from app.routers.security_router import security_router
+from app.routers.user_router import user_router
 from app.seed_admin import seed_admin
 
 
