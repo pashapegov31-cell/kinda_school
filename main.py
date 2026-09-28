@@ -15,6 +15,7 @@ from app.routers.auth_router import auth_router
 from app.routers.course_router import course_router
 from app.routers.enrollment_router import enrollment_router
 from app.routers.lesson_router import lesson_router
+from app.routers.progress_router import progress_router
 from app.routers.security_router import security_router
 from app.routers.user_router import user_router
 from app.seed_admin import seed_admin
@@ -66,3 +67,4 @@ app.include_router(course_router, prefix="/v1", tags=["Courses"])
 app.include_router(user_router, prefix="/v1", tags=["Users"])
 app.include_router(lesson_router, prefix="/v1", tags=["Lessons"])
 app.include_router(enrollment_router, prefix="/v1", tags=["Enrollment"])
+app.include_router(progress_router, prefix="/v1", tags=["Progress"])
