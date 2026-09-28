@@ -2,6 +2,8 @@ from fastapi import APIRouter, Depends, HTTPException, Query
 
 from app.dependencies import (
     get_create_course_uc,
+    get_current_user_id,
+    get_delete_course_uc,
     get_inmemory_courses_repo,
     get_publish_course_uc,
     require_role,
@@ -11,6 +13,7 @@ from app.exceptions.exceptions import CantBeUpdatedError, ForbiddenError
 from app.models.course_model import CourseCreate, CourseResponse
 from app.repositories.protocols.course_repository_protocol import CourseRepository
 from app.use_cases.create_course import CreateCourseUseCase
+from app.use_cases.delete_course import DeleteCourseUseCase
 from app.use_cases.publish_course import PublishCourseUseCase
 
 course_router = APIRouter()
@@ -75,3 +78,12 @@ async def publish(
         raise HTTPException(status_code=404, detail=str(e))
     except ForbiddenError as e:
         raise HTTPException(status_code=403, detail=str(e))
+
+
+@course_router.delete("/courses/{course_id}", status_code=204)
+async def delete_course(
+    course_id: int,
+    teacher_id: int = Depends(get_current_user_id),
+    delete_course_uc: DeleteCourseUseCase = Depends(get_delete_course_uc),
+):
+    await delete_course_uc.execute(course_id, teacher_id)
