@@ -22,6 +22,8 @@ from app.services.token_service import TokenService
 from app.use_cases.change_user_role import ChangeUserRoleUseCase
 from app.use_cases.create_course import CreateCourseUseCase
 from app.use_cases.create_lesson import LessonCreateUseCase
+from app.use_cases.delete_course import DeleteCourseUseCase
+from app.use_cases.delete_enrollment import DeleteEnrollmentUseCase
 from app.use_cases.delete_lesson import DeleteLessonUseCase
 from app.use_cases.enroll_in_course import EnrollInCourseUseCase
 from app.use_cases.get_course_lessons_list import GetCourseLessonsList
@@ -102,6 +104,16 @@ def get_delete_lesson_uc():
 
 def get_update_lesson_uc():
     return UpdateLessonUseCase(lessons_repo, courses_repo, users_repo)
+
+
+def get_delete_course_uc():
+    return DeleteCourseUseCase(
+        courses_repo, users_repo, lessons_repo, lessons_progress_repo, enrollments_repo
+    )
+
+
+def get_delete_enrollment_uc():
+    return DeleteEnrollmentUseCase(enrollments_repo, lessons_progress_repo)
 
 
 async def get_current_user_id(
