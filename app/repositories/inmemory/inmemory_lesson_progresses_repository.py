@@ -46,3 +46,7 @@ class InMemoryLessonProgressRepository:
             raise CantBeUpdatedError("Такого прогресса не существует")
         self._lesson_progresses[lesson_progress.id] = lesson_progress
         return lesson_progress
+
+    async def delete(self, lesson_progress_id: int) -> None:
+        if lesson_progress_id in self._lesson_progresses:
+            del self._lesson_progresses[lesson_progress_id]

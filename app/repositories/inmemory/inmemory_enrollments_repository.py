@@ -44,3 +44,7 @@ class InMemoryEnrollmentRepository:
             if enrollment.course_id == course_id:
                 enrollments.append(enrollment)
         return enrollments
+
+    async def delete(self, enrollment_id: int) -> None:
+        if enrollment_id in self._enrollments:
+            del self._enrollments[enrollment_id]
