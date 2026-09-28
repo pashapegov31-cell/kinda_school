@@ -29,6 +29,7 @@ from app.use_cases.enroll_in_course import EnrollInCourseUseCase
 from app.use_cases.get_course_lessons_list import GetCourseLessonsList
 from app.use_cases.get_lesson_details import GetLessonDetailsUseCase
 from app.use_cases.login_user import LoginUserUseCase
+from app.use_cases.make_progress import MakeProgressUseCase
 from app.use_cases.publish_course import PublishCourseUseCase
 from app.use_cases.registrate_user import RegisterUserUseCase
 from app.use_cases.update_lesson import UpdateLessonUseCase
@@ -98,22 +99,34 @@ def get_enroll_in_course_uc():
     return EnrollInCourseUseCase(enrollments_repo, courses_repo, users_repo)
 
 
-def get_delete_lesson_uc():
-    return DeleteLessonUseCase(lessons_repo, courses_repo, users_repo)
-
-
-def get_update_lesson_uc():
-    return UpdateLessonUseCase(lessons_repo, courses_repo, users_repo)
-
-
 def get_delete_course_uc():
     return DeleteCourseUseCase(
         courses_repo, users_repo, lessons_repo, lessons_progress_repo, enrollments_repo
     )
 
 
+def get_delete_lesson_uc():
+    return DeleteLessonUseCase(
+        lessons_repo,
+        courses_repo,
+        users_repo,
+        lessons_progress_repo,
+        get_delete_course_uc(),
+    )
+
+
+def get_update_lesson_uc():
+    return UpdateLessonUseCase(lessons_repo, courses_repo, users_repo)
+
+
 def get_delete_enrollment_uc():
     return DeleteEnrollmentUseCase(enrollments_repo, lessons_progress_repo)
+
+
+def get_make_progress_uc():
+    return MakeProgressUseCase(
+        lessons_progress_repo, enrollments_repo, lessons_repo, courses_repo
+    )
 
 
 async def get_current_user_id(
