@@ -27,3 +27,10 @@ class LessonListItem(BaseModel):
     title: str
     order: int
     duration_minutes: int | None
+
+
+class UpdatedLesson(BaseModel):
+    title: str | None
+    content: str | None
+    video_url: str | None
+    duration_minutes: int | None
