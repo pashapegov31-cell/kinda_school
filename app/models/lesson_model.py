@@ -30,7 +30,7 @@ class LessonListItem(BaseModel):
 
 
 class UpdatedLesson(BaseModel):
-    title: str | None
-    content: str | None
-    video_url: str | None
-    duration_minutes: int | None
+    title: str | None = None
+    content: str | None = None
+    video_url: str | None = None
+    duration_minutes: int | None = None

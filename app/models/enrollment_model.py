@@ -12,5 +12,5 @@ class EnrollmentResponse(BaseModel):
     enrolled_at: datetime
     progress: float
     completed: bool
-    completed_at: datetime
+    completed_at: datetime | None
     updated_at: datetime
