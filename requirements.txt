@@ -1,9 +1,11 @@
 pydantic
 pydantic[email]
+sqlalchemy
 pydantic-settings
 fastapi
 redis
 pytest
+pytest httpx 
 passlib[bcrypt]
 bcrypt==4.2.1
 python-jose[cryptography]
