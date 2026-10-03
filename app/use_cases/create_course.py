@@ -15,7 +15,7 @@ class CreateCourseUseCase:
 
     async def execute(self, new_course: CourseCreate, teacher_id: int) -> CourseEntity:
         if new_course.price < 0:
-            raise NotValidPrice("Цена не может бфть отрицательной")
+            raise NotValidPrice("Цена не может быть отрицательной")
 
         now = datetime.now(tz=timezone.utc)
         course = CourseEntity(
