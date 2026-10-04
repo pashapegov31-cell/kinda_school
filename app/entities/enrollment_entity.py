@@ -11,4 +11,4 @@ class EnrollmentEntity:
     progress: float
     completed: bool
     completed_at: datetime | None
-    updated_at: datetime
+    updated_at: datetime | None

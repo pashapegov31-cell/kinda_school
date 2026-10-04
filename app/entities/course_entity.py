@@ -19,4 +19,4 @@ class CourseEntity:
     price: Decimal
     status: CourseStatus
     created_at: datetime
-    updated_at: datetime
+    updated_at: datetime | None
