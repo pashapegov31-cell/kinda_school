@@ -1,12 +1,15 @@
 pydantic
 pydantic[email]
-sqlalchemy
+sqlalchemy[asyncio]
 pydantic-settings
 fastapi
 redis
 pytest
-pytest httpx 
+pytest
+httpx 
 passlib[bcrypt]
 bcrypt==4.2.1
 python-jose[cryptography]
 uvicorn
+alembic
+asyncpg
