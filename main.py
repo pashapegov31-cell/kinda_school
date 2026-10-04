@@ -3,6 +3,7 @@ from contextlib import asynccontextmanager
 from fastapi import FastAPI, Request
 from fastapi.responses import JSONResponse
 
+from app.core.database import async_engine
 from app.exceptions.exceptions import (
     AuthError,
     ForbiddenError,
@@ -26,6 +27,8 @@ async def lifespan(app: FastAPI):
     await seed_admin()
 
     yield
+
+    await async_engine.dispose()
 
 
 app = FastAPI(lifespan=lifespan)
