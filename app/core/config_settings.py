@@ -16,7 +16,11 @@ class Settings(BaseSettings):
     ADMIN_EMAIL: str
     ADMIN_PASSWORD: str
     # POSTGRES
-    DATABASE_URL: str
+    DATABASE_USER: str
+    DATABASE_PASSWORD: str
+    DATABASE_HOST: str
+    DATABASE_PORT: str
+    DATABASE_NAME: str
 
     # depedencies
     BACKEND_REPO: Literal["memory", "postgres"] = "memory"
