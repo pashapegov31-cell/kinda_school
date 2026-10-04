@@ -1,0 +1,17 @@
+# TOKENS
+TOKEN_SECRET_KEY=token_secret_key
+ALGORITHM=HS256
+ACCESS_TOKEN_EXPIRE_MINUTES=30
+
+# ADMIN SEED
+ADMIN_EMAIL=user@example.com
+ADMIN_NAME=user
+ADMIN_PASSWORD=secret_password
+
+
+# Postgres
+DATABASE_USER=postgres
+DATABASE_PASSWORD=pg_password
+DATABASE_HOST=localhost
+DATABASE_PORT=5432
+DATABASE_NAME=Your_base_name
