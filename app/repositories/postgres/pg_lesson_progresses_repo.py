@@ -9,7 +9,7 @@ from app.repositories.protocols.lesson_progress_repository_protocol import (
 from app.schemas.pg_lesson_progress_schema import LessonProgress
 
 
-class SQLLesson_ProgressesRepo(LessonProgressRepository):
+class SQLLessonProgressesRepository(LessonProgressRepository):
     def __init__(self, session: AsyncSession):
         self._session = session
 
