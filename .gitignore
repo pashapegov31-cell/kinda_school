@@ -33,7 +33,7 @@ target/
 Thumbs.db
 .env
 .env.local
-*.env.*
+
 
 # Logs and coverage
 *.log
