@@ -1,6 +1,7 @@
 from fastapi import APIRouter, Depends, HTTPException
 
-from app.dependencies import get_current_user_id, get_inmemory_users_repo
+from app.dependencies.auth_dependencies import get_current_user_id
+from app.dependencies.switch_repos import get_users_repo
 from app.models.user_model import UserResponse
 from app.repositories.protocols.users_repository_protocol import UsersRepository
 
@@ -10,7 +11,7 @@ security_router = APIRouter()
 @security_router.get("/me", response_model=UserResponse)
 async def me(
     user_id: int = Depends(get_current_user_id),
-    user_repo: UsersRepository = Depends(get_inmemory_users_repo),
+    user_repo: UsersRepository = Depends(get_users_repo),
 ):
     user = await user_repo.get_by_id(user_id)
     if user is None:

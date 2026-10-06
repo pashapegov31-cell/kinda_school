@@ -1,12 +1,11 @@
 from fastapi import APIRouter, Depends, HTTPException, Query
 
-from app.dependencies import (
+from app.dependencies.auth_dependencies import get_current_user_id, require_role
+from app.dependencies.switch_repos import get_courses_repo
+from app.dependencies.use_cases_dependencies import (
     get_create_course_uc,
-    get_current_user_id,
     get_delete_course_uc,
-    get_inmemory_courses_repo,
     get_publish_course_uc,
-    require_role,
 )
 from app.entities.user_entity import UserRole
 from app.exceptions.exceptions import CantBeUpdatedError, ForbiddenError
@@ -41,7 +40,7 @@ async def course_create(
 async def get_courses(
     limit: int = Query(default=10, ge=1, le=100),
     offset: int = Query(default=0, ge=0),
-    courses_repo: CourseRepository = Depends(get_inmemory_courses_repo),
+    courses_repo: CourseRepository = Depends(get_courses_repo),
 ):
     courses = await courses_repo.get_published()
     return [
@@ -55,7 +54,7 @@ async def get_own_courses(
     limit: int = Query(default=10, ge=1, le=100),
     offset: int = Query(default=0, ge=0),
     teacher_id: int = Depends(require_role(UserRole.TEACHER)),
-    courses_repo: CourseRepository = Depends(get_inmemory_courses_repo),
+    courses_repo: CourseRepository = Depends(get_courses_repo),
 ):
     own_courses = await courses_repo.get_by_teacher_id(teacher_id)
     return [

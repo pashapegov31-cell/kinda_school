@@ -1,6 +1,7 @@
 from fastapi import APIRouter, Depends
 
-from app.dependencies import get_current_user_id, get_make_progress_uc
+from app.dependencies.auth_dependencies import get_current_user_id
+from app.dependencies.use_cases_dependencies import get_make_progress_uc
 from app.models.lesson_progress_model import LessonProgressResponse
 from app.use_cases.make_progress import MakeProgressUseCase
 

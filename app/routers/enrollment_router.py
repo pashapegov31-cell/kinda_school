@@ -1,7 +1,7 @@
 from fastapi import APIRouter, Depends
 
-from app.dependencies import (
-    get_current_user_id,
+from app.dependencies.auth_dependencies import get_current_user_id
+from app.dependencies.use_cases_dependencies import (
     get_delete_enrollment_uc,
     get_enroll_in_course_uc,
 )

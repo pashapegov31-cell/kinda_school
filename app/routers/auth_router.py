@@ -1,6 +1,6 @@
 from fastapi import APIRouter, Depends, HTTPException
 
-from app.dependencies import get_login_uc, get_register_uc
+from app.dependencies.use_cases_dependencies import get_login_uc, get_register_uc
 from app.exceptions.exceptions import LoginError, UserAlreadyExistsError
 from app.models.user_model import AuthResponse, UserCreate, UserLogin
 from app.use_cases.login_user import LoginUserUseCase

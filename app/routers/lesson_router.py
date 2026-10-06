@@ -1,13 +1,12 @@
 from fastapi import APIRouter, Depends, Query
 
-from app.dependencies import (
+from app.dependencies.auth_dependencies import get_current_user_id, require_role
+from app.dependencies.use_cases_dependencies import (
     get_course_lessons_uc,
     get_create_lesson_uc,
-    get_current_user_id,
     get_delete_lesson_uc,
     get_lesson_details_uc,
     get_update_lesson_uc,
-    require_role,
 )
 from app.entities.user_entity import UserRole
 from app.models.lesson_model import (

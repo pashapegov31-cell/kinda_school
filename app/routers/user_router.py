@@ -1,6 +1,7 @@
 from fastapi import APIRouter, Depends
 
-from app.dependencies import get_change_user_role_uc, require_role
+from app.dependencies.auth_dependencies import require_role
+from app.dependencies.use_cases_dependencies import get_change_user_role_uc
 from app.entities.user_entity import UserRole
 from app.models.user_model import ChangeUserRole, UserResponse
 from app.use_cases.change_user_role import ChangeUserRoleUseCase
