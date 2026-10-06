@@ -23,7 +23,7 @@ class Settings(BaseSettings):
     DATABASE_NAME: str
 
     # depedencies
-    BACKEND_REPO: Literal["memory", "postgres"] = "memory"
+    BACKEND_REPO: Literal["memory", "postgres"] = "postgres"
 
 
 settings = Settings()  # pyright: ignore[reportCallIssue]
