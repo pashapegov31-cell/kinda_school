@@ -67,3 +67,10 @@ class SQLUsersRepository(UsersRepository):
         row.hashed_password = updated_user.hashed_password
         await self._session.flush()
         return self._to_entity(row)
+
+    async def get_users(self, offset: int, limit: int) -> list[UserEntity]:
+        users = await self._session.execute(
+            select(User).where(User.id > offset, User.id <= offset + limit)
+        )
+        rows = users.scalars()
+        return [self._to_entity(u) for u in rows]

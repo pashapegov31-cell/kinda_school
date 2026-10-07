@@ -44,3 +44,10 @@ class InMemoryUsersRepository:
             )
         self._users[updated_user.id] = updated_user
         return updated_user
+
+    async def get_users(self, offset: int, limit: int) -> list[UserEntity]:
+        users = []
+        for id, user in self._users.items():
+            if offset < id < offset + limit:
+                users.append(user)
+        return users
