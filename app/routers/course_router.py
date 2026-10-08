@@ -86,3 +86,14 @@ async def delete_course(
     delete_course_uc: DeleteCourseUseCase = Depends(get_delete_course_uc),
 ):
     await delete_course_uc.execute(course_id, teacher_id)
+
+
+@course_router.get("/courses/{course_id}", response_model=CourseResponse)
+async def get_course_by_id(
+    course_id: int,
+    courses_repo: CourseRepository = Depends(get_courses_repo),
+):
+    course = await courses_repo.get_by_id(course_id)
+    if course is None:
+        raise HTTPException(status_code=404, detail="Course not found")
+    return CourseResponse.model_validate(course)

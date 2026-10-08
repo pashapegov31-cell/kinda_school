@@ -19,7 +19,10 @@ async def change_role(
 ):
     updated_user = await change_user_role_uc.execute(change_role=change_role)
     return UserResponse(
-        email=updated_user.email, name=updated_user.name, role=updated_user.role
+        id=updated_user.id,
+        email=updated_user.email,
+        name=updated_user.name,
+        role=updated_user.role,
     )
 
 
