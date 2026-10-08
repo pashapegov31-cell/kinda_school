@@ -71,3 +71,15 @@ app.include_router(user_router, prefix="/v1", tags=["Users"])
 app.include_router(lesson_router, prefix="/v1", tags=["Lessons"])
 app.include_router(enrollment_router, prefix="/v1", tags=["Enrollment"])
 app.include_router(progress_router, prefix="/v1", tags=["Progress"])
+from fastapi.responses import FileResponse
+from fastapi.staticfiles import StaticFiles
+
+# Раздача статики
+app.mount("/css", StaticFiles(directory="app/static/css"), name="css")
+app.mount("/js", StaticFiles(directory="app/static/js"), name="js")
+
+
+@app.get("/{full_path:path}")
+async def serve_spa(full_path: str):
+    """Fallback для SPA-роутинга"""
+    return FileResponse("app/static/index.html")
