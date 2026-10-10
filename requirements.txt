@@ -13,3 +13,5 @@ python-jose[cryptography]
 uvicorn
 alembic
 asyncpg
+aiofiles
+python-multipart
