@@ -27,16 +27,22 @@ target/
 *.swp
 *.swo
 *.tmp
+*.sql
 
 # System files
 .DS_Store
 Thumbs.db
 .env
 .env.local
-
+uploaded_data
 
 # Logs and coverage
 *.log
 coverage/
 htmlcov/
 .coverage
+
+# in work
+agents/
+llm*
+tests/
